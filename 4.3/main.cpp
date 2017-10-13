@@ -1,3 +1,7 @@
+/*
+ * Реализовать очередь с помощью двух стеков. Использовать стек, реализованный с помощью динамического буфера.
+ */
+
 #include <iostream>
 #include <cassert>
 
@@ -6,7 +10,7 @@ using std::cout;
 using std::endl;
 
 #define START_SIZE 3
-#define PUSH_COMMAND 3
+#define PUSH_COOMMAND 3
 #define POP_COMMAND 2
 
 template <class T>
@@ -22,7 +26,7 @@ public:
     Stack<T>& operator=(Stack<T>&& other);
 
     void Push(const T& value);
-    int Pop();
+    bool Pop();
     void getInfo();
     int getSize() { return size; }
     T getLastElem();
@@ -35,7 +39,7 @@ private:
 
 template <class T>
 Stack<T>::Stack() :
-    size(START_SIZE)
+        size(START_SIZE)
 {
     buffer = new T[START_SIZE];
 }
@@ -91,13 +95,13 @@ void Stack<T>::Push(const T &value)
 }
 
 template <class T>
-int Stack<T>::Pop()
+bool Stack<T>::Pop()
 {
     if (!realSize)
-        return -1;
+        return false;
     buffer[realSize - 1] = 0;
     realSize--;
-    return 0;
+    return true;
 }
 
 
@@ -114,7 +118,7 @@ public:
     Queue& operator=(Queue&& other) = delete;
 
     void push(int value);
-    int pop(int value);
+    bool pop(int value);
     void showQueue();
 private:
     Stack<int> stack1;
@@ -126,14 +130,18 @@ void Queue::push(int value) {
     stack1.Push(value);
 }
 
-int Queue::pop(int value) {
+bool Queue::pop(int value) {
     if (stack2.getRealSize()) {
-        if (stack2.Pop() == -1) {
-            return -1;
+        if (stack2.getLastElem() != value) {
+            return false;
         }
+        stack2.Pop();
     } else {
-        if (!stack1.getRealSize())
-            return -1;
+        if (!stack1.getRealSize() && value == -1) {
+            return true;
+        }else if (!stack1.getRealSize() && value != -1){
+            return false;
+        }
         int size = stack1.getRealSize() - 1;
         for (int i = 0; i < size; i++) {
             int tmp = stack1.getLastElem();
@@ -143,11 +151,11 @@ int Queue::pop(int value) {
         int tmp = stack1.getLastElem();
         if (tmp == value) {
             stack1.Pop();
-            return 0;
+            return true;
         }
-        return -1;
+        return false;
     }
-    return 0;
+    return true;
 }
 
 void Queue::showQueue() {
@@ -164,16 +172,16 @@ int main () {
         cin >> command;
         cin >> value;
         if (command == POP_COMMAND) {
-            if (q.pop(value) == -1 && value != -1) {
+            if (!q.pop(value)) {
                 result = "NO";
                 cout << result;
                 return 0;
             }
-        } else if (command == PUSH_COMMAND) {
+        } else if (command == PUSH_COOMMAND) {
             q.push(value);
         }
     }
-    //q.showQueue();
     cout << result;
+    return 0;
 }
 
