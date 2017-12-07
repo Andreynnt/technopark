@@ -1,0 +1,3 @@
+/home/andreynt/park/Algoritms/1.3/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/andreynt/park/Algoritms/1.3/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/andreynt/park/Algoritms/1.3/cmake-build-debug/CMakeFiles/1_3.dir
