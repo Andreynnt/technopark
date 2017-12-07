@@ -1,3 +1,0 @@
-/home/andreynt/park/Algoritms/7.1/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/andreynt/park/Algoritms/7.1/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/andreynt/park/Algoritms/7.1/cmake-build-debug/CMakeFiles/7_1.dir
